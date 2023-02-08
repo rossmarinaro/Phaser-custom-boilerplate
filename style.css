@@ -1,0 +1,213 @@
+#canvas-overlay{
+	background-color: #ff0000;
+	opacity: 0;
+}
+
+#Leaderboard, noscript {
+	font-family: 'Arial Black', sans-serif;
+	text-shadow:1px 1px 0px #3c3d3d;
+	color: #ff0000;
+	margin: auto 0;
+	text-align:center;
+	-webkit-text-stroke: 0.06rem #000000;
+}
+
+#input-bar{
+	color: #2ab7ec;
+}
+
+#game > div {
+	z-index: 2;
+}
+
+
+#modal{
+
+	position: relative;
+	margin: auto;
+}
+
+
+#inner-content form{
+	padding: 7%;
+	margin: 5% 15% 0 auto; 
+	
+}
+
+.loader {
+
+	font-size: 10px;
+	margin: 50px auto;
+	text-indent: -9999em;
+	width: 11em;
+	height: 11em;
+	border-radius: 50%;
+
+	background: -moz-linear-gradient(left, #ffffff 10%, rgba(255, 255, 255, 0) 42%);
+	background: -webkit-linear-gradient(left, #ffffff 10%, rgba(255, 255, 255, 0) 42%);
+	background: -o-linear-gradient(left, #ffffff 10%, rgba(255, 255, 255, 0) 42%);
+	background: -ms-linear-gradient(left, #ffffff 10%, rgba(255, 255, 255, 0) 42%);
+	background: linear-gradient(to right, #ffffff 10%, rgba(255, 255, 255, 0) 42%);
+	position: relative;
+	-webkit-animation: load3 1.4s infinite linear;
+	animation: load3 1.4s infinite linear;
+	-webkit-transform: translateZ(0);
+	-ms-transform: translateZ(0);
+	transform: translateZ(0);
+}
+
+.loader:before {
+	width: 50%;
+	height: 50%;
+	background: #ffffff;
+	border-radius: 100% 0 0 0;
+	position: absolute;
+	top: 0;
+	left: 0;
+	content: '';
+}
+
+.loader:after {
+	background: none;
+	width: 75%;
+	height: 75%;
+	border-radius: 50%;
+	content: '';
+	margin: auto;
+	position: absolute;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+}
+  
+@-webkit-keyframes load3 {
+	0% {
+	  -webkit-transform: rotate(0deg);
+	  transform: rotate(0deg);
+	}
+	100% {
+	  -webkit-transform: rotate(360deg);
+	  transform: rotate(360deg);
+	}
+}
+@keyframes load3 {
+	0% {
+	  -webkit-transform: rotate(0deg);
+	  transform: rotate(0deg);
+	}
+	100% {
+	  -webkit-transform: rotate(360deg);
+	  transform: rotate(360deg);
+	}
+}
+
+
+.prompt-main-menu {
+	position: relative;
+	display: block;
+	margin: 0 auto;
+	box-sizing: border-box;
+	border: 0.5rem solid #ff0000;
+	background-color: #000000;
+	text-align: center;
+	cursor: crosshair; 
+}
+.digitizer{
+	font-family: "Digitizer", sans-serif;
+}
+
+.digitizer p {
+	font-size: 1.8em;
+	padding: 8% 14% 15% 10%;
+	display: block;
+	margin: 0 auto;
+}
+.digitizer p:hover:not(#login-text){
+	color: #ff0000;
+}
+ul:hover{
+	color: #ff0000;
+}
+.bangers{
+	font-family: 'Bangers', sans-serif;
+}
+.red-yellow{
+	display: flex;
+	color: #ffff00;
+	-webkit-text-stroke: 0.04rem rgb(255, 0, 0);
+}
+.form-input{
+	width: 80%;
+	margin: 0 auto;
+}
+
+html, body{
+	height: 100%; 
+	width: 100%;
+	position: fixed;
+	overflow: hidden;
+	background-repeat: repeat;
+	background-color: #000000;
+	margin: 0 auto;
+	padding: 0;
+	/*   user-select: none; */
+}
+h4, noscript{
+	position: relative;
+	margin: auto;
+	text-align: center;
+	font-family: 'Arial', sans-serif;
+	color: #FFFFFF;
+}
+ul, li{
+	text-decoration: none;
+	list-style: none;
+}
+input{
+	background: linear-gradient(top, #d6d7d7, #dee0e0);
+	border: 0.3rem solid #000000;
+	border-radius: 4px;
+	box-shadow: 0 1px #fff;
+	box-sizing: border-box;
+	display: block;
+	color: #b9b9b9;
+	height: 50px;
+	transition: box-shadow 0.3s;
+}
+input[type="text"] :focus 
+{
+	box-shadow: 0 0 4px 1px rgba(55, 166, 155, 0.3);
+	outline: 0;
+}
+input[id="submit-username"] 
+{
+	margin-top: 8%;
+	height: 55px;
+	display: block;
+	font-family: Arial, "Helvetica", sans-serif;
+	font-size: 16px;
+	font-weight: bold;
+	color: #fff;
+	text-decoration: none;
+	text-transform: uppercase;
+	text-align: center;
+	text-shadow: 1px 1px 0px #3c3d3d;
+	cursor: pointer;
+	border: none;  
+	background-color: #ff0000;
+	background-image: linear-gradient(top,#414600,#262900);
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
+	border-bottom-right-radius: 5px;
+	border-bottom-left-radius: 5px;
+	box-shadow: inset 0px 1px 0px #0e0e0e, 0px 5px 0px 0px #a03e06, 0px 10px 5px #999;
+}
+input[type="submit"] :active {
+	top:3px;
+	box-shadow: inset 0px 1px 0px #2ab7ec, 0px 2px 0px 0px #31524d, 0px 5px 3px #999;
+}    
+
+
+
+

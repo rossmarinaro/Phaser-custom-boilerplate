@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover"
+    />
+    <meta 
+      http-equiv="Content-Security-Policy" 
+      content="
+        default-src * 'self' 'unsafe-inline' 'unsafe-eval' file: data: blob: gap: https://ssl.gstatic.com; 
+        connect-src * 'self' file: data: blob: https: 'unsafe-inline' 'unsafe-eval';
+        script-src * 'self' file: data: blob: https: 'unsafe-inline' 'unsafe-eval';
+        worker-src * 'self' file: data: blob: https:; 
+        style-src 'self' 'unsafe-inline'; 
+        media-src * 'self' file: data: blob: https:; 
+        img-src * 'self' file: data: blob: http:;
+        object-src * 'self' file: data: blob: https:;
+      "
+    >
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <meta name="theme-color" content="#000000" />
+
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="application-name" content="Pastaboss: A Recipe For Disaster" />
+    <meta name="apple-mobile-web-app-title" content="Pastaboss: A Recipe For Disaster" />
+
+    <meta name="msapplication-starturl" content="./" />
+    <meta property="og:image" content="img/logo.png" />
+    <meta property="og:image:width" content="1080" />
+    <meta property="og:image:height" content="1080" />
+    <meta name="format-detection" content="telephone=no">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="color-scheme" content="light dark">
+<!-- 
+    <link rel="manifest" href="./manifest.json" /> -->
+  <!--   <link rel="icon" href="./favicon.ico" /> -->
+    <link rel="stylesheet" type="text/css" href="src/index.css" />
+    <link rel="icon" type="image/png" sizes="192x192" href="./icons/logo.png" />
+  <!--   <link rel="icon" type="image/png" sizes="512x512" href="./icons/logo.png" /> -->
+<!--     <link rel="apple-touch-icon" type="image/png" sizes="192x192" href="./icons/logo.png" />
+    <link rel="apple-touch-icon" type="image/png" sizes="512x512" href="./icons/logo.png" />
+    <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon" /> -->
+
+
+    <title>Pastaboss: A Recipe For Disaster &#127837; &#128076; </title>
+
+    <noscript>OOF! You need JavaScript for this app to work!</noscript> 
+
+    <!-- installs the serviceWorker -->
+    <!-- <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('./sw.js')
+        })
+      }
+    </script> -->
+  </head>
+  <body>
+
+<!--  init wasm:: to use: (<any>window.wasmLoad(argA, argB))  -->
+
+     <script type="module">
+        import init, { add } from '../assets/wasm/pkg/hello_wasm.js';
+        await init();
+        window.wasmLoad = async function(a, b) {
+            return add(a, b);
+        }
+      </script>
+
+      <!-- PLATFORM -->
+
+      <!-- <div id="deviceready" class="app canvas-overlay">
+            <div id="game"></div>
+          </div> -->
+
+    <!--<script src="cordova.js"></script>
+        <script src="index.js"></script> -->
+    
+
+    <!-- WEB -->
+
+    <div id="game"></div>    
+    <script src="/socket.io/socket.io.js"></script>
+
+  </body>
+
+</html>

@@ -1,0 +1,40 @@
+
+@font-face {
+
+}
+
+
+/**********************************************  MEDIA QUERIES */
+
+
+@media screen and (orientation: portrait)
+{
+	canvas{
+		border: none;
+	}
+	body{
+		background-image: none;
+		background-color: #000000;
+	}
+}
+@media screen and (orientation: landscape)
+{
+	canvas{
+		box-sizing: border-box; 
+	}
+	body{
+		/* background-color: #000000; */background-image: url("assets/static/spaghetti.svg");
+	}
+
+}
+@media screen and (min-width: 1030px) /* desktop only */
+{
+/* 	div{
+		margin-top: 3%;  1%; 
+	} */
+	#game > canvas{
+		background-color: #000000;
+		box-shadow: 0 0 85px #000000;
+		/* border: 0.5em solid #313131; */
+	}
+}
