@@ -119,7 +119,7 @@ export class Text {
         const options =  optionsArr !== null ? true : false,
             message = _message + '                                       ',
             speechBub = scene.add.sprite(x, y, 'speech_bub').play('speech_bub_anims').setFlipX(flipX).setDepth(y + 1),
-            txt = scene.add.text(speechBub.x, speechBub.y - 30, `!`, { font: "90px Digitizer"}).setColor('#000000').setDepth(y + 2);
+            txt = scene.add.text(speechBub.x, speechBub.y - 30, `!`, { font: "90px Arial"}).setColor('#000000').setDepth(y + 2);
         
         if (optionsArr === null)
             optionsArr = [];

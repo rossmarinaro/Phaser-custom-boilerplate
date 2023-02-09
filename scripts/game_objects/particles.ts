@@ -90,7 +90,7 @@ export class Particles {
 
     //--------------------------------------------------
 
-    public static setCommon (scene: Phaser.Scene): void
+    public static setCommon (scene: Phaser.Scene): void   //some common particles
     { 
         
         System.Process.app.particles.destroyEmitter = new System.Process.app.particles(scene, '', ['fire_ball', 1, -1000, -1000]);

@@ -113,17 +113,17 @@
 	text-align: center;
 	cursor: crosshair; 
 }
-.digitizer{
-	font-family: "Digitizer", sans-serif;
+.Arial{
+	font-family: "Arial", sans-serif;
 }
 
-.digitizer p {
+.Arial p {
 	font-size: 1.8em;
 	padding: 8% 14% 15% 10%;
 	display: block;
 	margin: 0 auto;
 }
-.digitizer p:hover:not(#login-text){
+.Arial p:hover:not(#login-text){
 	color: #ff0000;
 }
 ul:hover{

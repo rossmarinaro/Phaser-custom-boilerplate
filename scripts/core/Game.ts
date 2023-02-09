@@ -59,15 +59,12 @@ export class Game {
             miniGameDoors : scene.physics.add.staticGroup(),
             obstacle : scene.physics.add.staticGroup(),
             exit : scene.physics.add.staticGroup( {runChildUpdate: true}),
-            waterSplashSprite : scene.add.group({runChildUpdate: true}),
             pickups : scene.physics.add.group({ runChildUpdate: true }),
         //enemies
             enemyFire : scene.physics.add.group({ runChildUpdate: true }),   
             bossFire : scene.physics.add.group({ runChildUpdate: true }),
             bossFire2 : scene.physics.add.group({ runChildUpdate: true }),
             enemy: scene.physics.add.group({ runChildUpdate: true }),
-            eggplantWeaponsGroup : scene.add.group({ runChildUpdate: true }),
-            enemySauce : scene.add.group({ runChildUpdate: true }),
         //weapons
             hitboxGroup : scene.physics.add.group({ runChildUpdate: true }),
             projectile : scene.physics.add.group({ runChildUpdate: true }),

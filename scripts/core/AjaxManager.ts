@@ -13,7 +13,7 @@ export class AjaxManager {
     //proxy server address (mobile version) or null if same 
 
     private static proxyConnection: string | null = System.Config.internet.proxy ? 
-        'https://pastaboss.onrender.com/' : null;
+        'https://your-proxy-address/' : null;
 
 //-------------------------- make xhr http request
 

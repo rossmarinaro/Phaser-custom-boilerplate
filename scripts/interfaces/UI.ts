@@ -76,11 +76,11 @@ export class UI {
 
         //health text
 
-            this.healthText = ui.add.text(135, 20, 'Health', {fontSize: '25px', fontFamily: 'Digitizer'}).setColor('#ffff00').setStroke('#000000', 4).setShadow(2, 2, '#000000', 1, false);
+            this.healthText = ui.add.text(135, 20, 'Health', {fontSize: '25px', fontFamily: 'Arial'}).setColor('#ffff00').setStroke('#000000', 4).setShadow(2, 2, '#000000', 1, false);
             
         ////low health
 
-            this.lowHealthText = ui.add.text(135, 20, 'Health', {fontSize: '25px', fontFamily: 'Digitizer'}).setColor('#ff0000').setStroke('#000000', 4).setShadow(2, 2, '#000000', 1, false);
+            this.lowHealthText = ui.add.text(135, 20, 'Health', {fontSize: '25px', fontFamily: 'Arial'}).setColor('#ff0000').setStroke('#000000', 4).setShadow(2, 2, '#000000', 1, false);
 
             this.healthBar = ui.add.image(180, 80, 'meter_interface');
             this.hp1 = ui.add.image(45, 80, 'health_bar');
@@ -97,21 +97,21 @@ export class UI {
               
             //// game completed
 
-                ui.add.text(25, 125, 'Complete:', {fontSize: '20px', fontFamily: 'Digitizer'}).setColor('#ffff00').setStroke('#000000', 4).setShadow(2, 2, '#000000', 1, false);
+                ui.add.text(25, 125, 'Complete:', {fontSize: '20px', fontFamily: 'Arial'}).setColor('#ffff00').setStroke('#000000', 4).setShadow(2, 2, '#000000', 1, false);
                 
-                this.completedTextQuant = ui.add.text(140, 127, scene.data['completed'], {fontSize: '21px', fontFamily: 'Digitizer'}).setColor('#ff0000').setStroke('#ffff00', 4).setShadow(2, 2, '#000000', 1, false);
+                this.completedTextQuant = ui.add.text(140, 127, scene.data['completed'], {fontSize: '21px', fontFamily: 'Arial'}).setColor('#ff0000').setStroke('#ffff00', 4).setShadow(2, 2, '#000000', 1, false);
             
             ////dough
 
-                ui.add.text(200, 125, 'Dough:', {fontSize: '20px', fontFamily: 'Digitizer'}).setColor('#ffff00').setStroke('#000000', 4).setShadow(2, 2, '#000000', 1, false);
+                ui.add.text(200, 125, 'Dough:', {fontSize: '20px', fontFamily: 'Arial'}).setColor('#ffff00').setStroke('#000000', 4).setShadow(2, 2, '#000000', 1, false);
             
             ////dough quantity
 
-                this.doughQuantity = ui.add.text(280, 127, `$${scene.data['doughAvailable']}`, {fontSize: '21px', fontFamily: 'Digitizer'}).setColor('#ff0000').setStroke('#ffff00', 4).setShadow(2, 2, '#000000', 1, false); 
+                this.doughQuantity = ui.add.text(280, 127, `$${scene.data['doughAvailable']}`, {fontSize: '21px', fontFamily: 'Arial'}).setColor('#ff0000').setStroke('#ffff00', 4).setShadow(2, 2, '#000000', 1, false); 
             
             ////equipped
 
-                ui.add.text(490, 20, 'Equipped', {fontSize: '25px', fontFamily: 'Digitizer'}).setColor('#ffff00').setStroke('#000000', 4).setShadow(2, 2, '#000000', 1, false);
+                ui.add.text(490, 20, 'Equipped', {fontSize: '25px', fontFamily: 'Arial'}).setColor('#ffff00').setStroke('#000000', 4).setShadow(2, 2, '#000000', 1, false);
                 
                 ui.add.graphics({fillStyle: {color: 0xffff00, alpha: 1}}).fillRect(374, 65, 350, 90);
                 
@@ -134,10 +134,10 @@ export class UI {
 
             ////equipment quantities
 
-                this.quantities.C = ui.add.text(413, 120, '', {fontSize: '18px', fontFamily: 'Digitizer'}).setColor('#ff0000').setStroke('#ffff00', 4).setShadow(2, 2, '#000000', 1, false); 
-                this.quantities.D = ui.add.text(497, 120, '', {fontSize: '18px', fontFamily: 'Digitizer'}).setColor('#ff0000').setStroke('#ffff00', 4).setShadow(2, 2, '#000000', 1, false); 
-                this.quantities.A = ui.add.text(582, 120, '', {fontSize: '18px', fontFamily: 'Digitizer'}).setColor('#ff0000').setStroke('#ffff00', 4).setShadow(2, 2, '#000000', 1, false); 
-                this.quantities.B = ui.add.text(665, 120, '', {fontSize: '18px', fontFamily: 'Digitizer'}).setColor('#ff0000').setStroke('#ffff00', 4).setShadow(2, 2, '#000000', 1, false); 
+                this.quantities.C = ui.add.text(413, 120, '', {fontSize: '18px', fontFamily: 'Arial'}).setColor('#ff0000').setStroke('#ffff00', 4).setShadow(2, 2, '#000000', 1, false); 
+                this.quantities.D = ui.add.text(497, 120, '', {fontSize: '18px', fontFamily: 'Arial'}).setColor('#ff0000').setStroke('#ffff00', 4).setShadow(2, 2, '#000000', 1, false); 
+                this.quantities.A = ui.add.text(582, 120, '', {fontSize: '18px', fontFamily: 'Arial'}).setColor('#ff0000').setStroke('#ffff00', 4).setShadow(2, 2, '#000000', 1, false); 
+                this.quantities.B = ui.add.text(665, 120, '', {fontSize: '18px', fontFamily: 'Arial'}).setColor('#ff0000').setStroke('#ffff00', 4).setShadow(2, 2, '#000000', 1, false); 
 
 
         /////alert text for item picked up
@@ -229,7 +229,7 @@ export class UI {
 
     private checkOrientation (scene: Phaser.Scene, key: string): [number, number] | undefined
     {
-        switch (key)
+        switch (key)   //some scene key examples
         {
             case 'Preload': 
                 return[

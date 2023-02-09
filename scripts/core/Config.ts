@@ -1,4 +1,4 @@
-import * as ENABLE3D  from '@enable3d/phaser-extension';
+
 import * as types from '../../../typings/types';
 
 import { Canvas }  from '@enable3d/phaser-extension';

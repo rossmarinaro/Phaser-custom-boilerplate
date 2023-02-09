@@ -10,52 +10,9 @@ import { Pickup } from '../game_objects/items/pickups';
 import { Accessory } from '../game_objects/items/accessories';
 
 
-//enemies
 
-import Banana  from '../game_objects/enemies/Banana.js';
-import BakedBeans from '../game_objects/enemies/BakedBeans.js';
-import Apple from '../game_objects/enemies/Apple.js';
-import Meatball from '../game_objects/enemies/Meatball.js';
-import CarpShooter from '../game_objects/enemies/CarpShooter.js';
-import Chili from '../game_objects/enemies/Chili.js';
-import Cheese from '../game_objects/enemies/Cheese.js';
-import CollieFlower from '../game_objects/enemies/CollieFlower.js';
-import Mobster from '../game_objects/enemies/Mobster.js';
-import Crab from '../game_objects/enemies/Crab.js';
-import JellyFish from '../game_objects/enemies/JellyFish.js';
-import Cupcake from '../game_objects/enemies/Cupcake.js';
-import NavalOrange from '../game_objects/enemies/NavalOrange.js';
-import Cat from '../game_objects/enemies/Cat.js';
-import Pickle from '../game_objects/enemies/Pickle.js';
-import Piranha from '../game_objects/enemies/Piranha.js';
-import MacZombie from '../game_objects/enemies/MacZombie.js';
-import GhostPepper from '../game_objects/enemies/GhostPepper.js';
-import Pirate from '../game_objects/enemies/Pirate.js';
-import PirateBoat from '../game_objects/enemies/PirateBoat.js';
-import IceCreamCone from '../game_objects/enemies/IceCreamCone.js';
-import Taxi from '../game_objects/enemies/Taxi.js';
-import WalkingSpaghettiMonster from '../game_objects/enemies/WalkingSpaghettiMonster.js';
-import Sniper from '../game_objects/enemies/Sniper.js';
-import SushiChef from '../game_objects/enemies/SushiChef.js';
+import SomeBaddieClass from '../game_objects/yourclass';
 
-
-//bosses
-
-import Rival from '../game_objects/rivals/main';
-import CrookedCook from '../game_objects/bosses/CrookedCook.js';
-import EggPlant from '../game_objects/bosses/Eggplant.js';
-import HitWoman from '../game_objects/bosses/HitWoman.js';
-import ScorpionPepper from '../game_objects/bosses/ScorpionPepper.js';
-import Ninja from '../game_objects/bosses/Ninja.js';
-import CakeBoss from '../game_objects/bosses/CakeBoss.js';
-import PizzaPie from '../game_objects/bosses/PizzaPie.js';
-import PizzaSlice from '../game_objects/bosses/PizzaSlice.js';
-import MonkFish from '../game_objects/bosses/MonkFish.js';
-import SupremeLeader from '../game_objects/bosses/SupremeLeader.js';
-import HotDog from '../game_objects/bosses/HotDog.js';
-import Fluke1 from '../game_objects/bosses/Fluke1.js';
-import Fluke2 from '../game_objects/bosses/Fluke2.js';
-import Mummy from '../game_objects/bosses/Mummy.js';
 
 
 export class SpawnManager {
@@ -85,46 +42,7 @@ export class SpawnManager {
         }
 
         SpawnManager.entities = {
-            Banana,
-            BakedBeans,
-            Apple,
-            Meatball,
-            CarpShooter,
-            Chili,
-            Cheese,
-            CollieFlower,
-            Mobster,
-            Crab,
-            JellyFish,
-            Cupcake,
-            NavalOrange,
-            Cat,
-            Pickle,
-            Piranha,
-            MacZombie,
-            GhostPepper,
-            Pirate,
-            PirateBoat,
-            IceCreamCone,
-            Taxi,
-            WalkingSpaghettiMonster,
-            Sniper,
-            SushiChef,
-            Rival,
-            CrookedCook,
-            EggPlant,
-            HitWoman,
-            ScorpionPepper,
-            Ninja,
-            CakeBoss,
-            PizzaPie,
-            PizzaSlice,
-            MonkFish,
-            SupremeLeader,
-            HotDog,
-            Fluke1,
-            Fluke2,
-            Mummy 
+            SomeBaddieClass,
         }
 
 

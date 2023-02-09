@@ -10,7 +10,6 @@ import { Game } from './Game';
 import { AudioManager } from './Audio';
 import { AjaxManager } from './AjaxManager';
 import { InputManager } from '../controls/Inputs';
-import { CollisionManager } from '../collisions/main';
 import { LoginManager } from './Login';
 import { InventoryManager } from './Inventory';
 import { MapManager } from './Maps';
@@ -19,32 +18,20 @@ import { SpawnManager } from './Spawns';
 import { ShaderManager } from '../shaders/main';
 
 import { UI } from '../interfaces/UI';
-import { Sampler, SamplerUI } from '../instruments/SamplerUI'; 
-import { BassUI } from '../instruments/BassUI';
-import { SV_UI } from '../minigames/swanky_velvet_platformer/SV_UI';
 import { Text } from './Text';
-import { Cheats } from './Cheats';
+
 import { Camera } from './camera';
 
 import { Particles } from '../game_objects/particles';
 import { Projectile } from '../game_objects/projectile';
-import { ThirdDimension } from '../3d/ThirdDimension';
 
 import { Boot } from '../preload/Boot';
 import { Preload } from '../preload/Preload';
 import { Controller } from '../controls/Controller';
 import { HUD } from '../interfaces/HUD';
-import { Modal } from '../menus/modal/main';
 import { TextUI } from './Text';
-
-import { MainMenu } from '../menus/MainMenu';
-import { SaveMenu } from '../menus/SaveMenu'; 
-import { WarpMenu } from '../menus/WarpMenu';
-import { PauseMenu } from '../menus/PauseMenu';
-import { Menu3D } from '../3d/menu';
-
 import { Background } from '../scenes/Background';
-import { Chat } from '../multiplayer/chat';
+
 
 
 //------------------------------------ APP
@@ -63,13 +50,10 @@ export default class Application {
     public maps: typeof MapManager = MapManager
 
     public cam: typeof Camera = Camera
-    public cheats: typeof Cheats = Cheats
     public text: typeof Text = Text
 
     public projectile: typeof Projectile = Projectile
     public particles: typeof Particles = Particles
-
-    public ThirdDimension: typeof ThirdDimension = ThirdDimension
     
     public gfx: Phaser.GameObjects.Graphics
     public zoneFront: Phaser.GameObjects.Zone
@@ -143,7 +127,7 @@ export default class Application {
         };
 
         this.physics = {
-            collisions: CollisionManager,
+            collisions: 'some CollisionManager class',
             default: 'arcade'
         };
 
@@ -151,17 +135,7 @@ export default class Application {
 
             Controller, 
             HUD, 
-            TextUI, 
-            SamplerUI, 
-            BassUI,
-            SV_UI,
-            MainMenu,
-            PauseMenu, 
-            SaveMenu, 
-            WarpMenu,  
-            Chat, 
-            Modal,
-            Menu3D
+            TextUI
 
         ];
 
@@ -184,9 +158,6 @@ export default class Application {
             BassUI: false,
         };
 
-        this.instruments = {
-            sampler: new Sampler
-        };
 
     //user account schema
 

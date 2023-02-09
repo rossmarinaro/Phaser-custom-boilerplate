@@ -107,22 +107,9 @@ export class AudioManager {
 
         switch (stage)
         {
-            case 'Middle Yeast' : case 'Meatball Mountain' : return System.Process.app.timeOfDay > 17 ? 'middle_pastern' : 'midyeast';
-            case 'Lab' : case 'Melon Land' : return System.Process.app.timeOfDay > 17 ? 'electronic' : 'pastaboss_theme';
-            case 'Pub' : case 'Sushi Bar' : case 'Cafe' : case 'Weapon Shack' : case 'Pawn Shop' : return 'level1';
-            case 'Freezer' : case 'Leaning Tower Of Pizza' : return System.Process.app.timeOfDay > 17 ? 'mushroompizza' : 'mushroompizza2';
-            case 'Scone Beach' : case 'Beercano' : return System.Process.app.timeOfDay > 17 ? 'track3' : 'pastafari';
-            case 'Red Sea' : case 'Carb Kingdom' : return System.Process.app.timeOfDay > 17 ? 'track4' : 'level2';
-            case 'Freezer Courtyard' : case 'Greater GraterVille' : return System.Process.app.timeOfDay > 17 ? 'track1' : 'lv2ext';
-            case 'The Oven' : case 'Tunnel' : case 'SkeetShoot': return System.Process.app.timeOfDay > 17 ? 'slap' : 'al_electro';
-            case 'Cotton Candy Clouds' : case 'Fish Town' : case 'Pinball' : return System.Process.app.timeOfDay > 17 ? 'track2' : 'phryg1';
-            case 'Swanky Franks' : case 'Flukrainian Club' : return System.Process.app.timeOfDay > 17 ? 'dance' : 'minimal';
-            case 'Strip Club' : case 'Secret Club' : return System.Process.app.timeOfDay > 17 ? 'funkhop' : 'pastahouse';
-            case 'Sushi Restaurant':  case 'Tomb' : case 'Seashell Mini Game': return 'cave';
-            case 'Herb Garden' : case 'Crucif Forest' : return System.Process.app.timeOfDay > 17 ? 'creepy' : 'midyeast3';
-            case 'Bubble Mini Game' : case 'Arcade' : return 'minigame1_audio'; 
-            case '?' : case 'Fun House' : case 'DeathMatch' : return 'fight_players'; //racing mini game
-            default: return 'pastaboss_theme';
+            case 'Some level key': return 'some music';
+
+            default: return 'some default music';
         }
     }
     

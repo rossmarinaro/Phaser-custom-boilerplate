@@ -66,13 +66,6 @@ export type ammo = {
     dynamite: number
 } 
 
-export type characters = {
-    bountyHunter: boolean
-    hitwoman: boolean
-    assassin: boolean
-    supremLeader: boolean
-    swankyVelvet: boolean
-} 
 
 export type player = {
     character: string

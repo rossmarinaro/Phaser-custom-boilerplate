@@ -59,7 +59,7 @@
  
             this._projectile?.add(this);
     
-            switch(this.type)
+            switch(this.type)  //some projectile key examples
             {
          
                 case 'keywi': case 'pasta_pump': // no dmg
@@ -366,26 +366,6 @@
             }      
         //------------------------------------------------- on scene update
 
-            this.scene.events.on('update', ()=> {
-
-                if (!this.active)
-                    return;
-
-                else if (System.Process.app.inventory.handheldItems.includes(this.type))
-                {
-                    this.setY(this.player.y);
-                    this.scene.time.delayedCall(500, ()=> this.destroy());
-                }
-                else if (System.Process.app.inventory.handheldItemsAlt.includes(this.type))
-                {
-                    this.setPosition(this.player.flipX ? this.player.x - 50 : this.player.x + 80, this.player.y)
-                        .setFlipX(this.player.flipX ? true : false);
-                    this.scene.time.delayedCall(1200, ()=> this.destroy());
-                }
-                if (this.type === 'jar' || this.type === 'sauce_jar')
-                    this.setPosition(this.player.flipX ? this.player.x - 50 : this.player.x + 50, this.player.y);
-
-            });
 
         // destroy projectile
 

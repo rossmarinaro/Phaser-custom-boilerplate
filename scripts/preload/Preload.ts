@@ -127,25 +127,25 @@ export class Preload extends Phaser.Scene {
             x: width,
             y: height / 2 - 100,
             text: 'Loading',
-            style: {font: '50px Digitizer'}
+            style: {font: '50px Arial'}
         }).setColor('#ff0000').setStroke('#FFB000', 4).setShadow(2, 2, '#ffff00', 1, false).setOrigin(0.5, 0.5);   
         this.stageText = scene.make.text({
             x: width,
             y: height / 2 - 30,
             text: this.data['currentStage'],
-            style: { font: '20px Digitizer' }
+            style: { font: '20px Arial' }
         }).setColor('#ffffff').setStroke('#FF0000', 4).setOrigin(0.5, 0.5);
         this.percentText = scene.make.text({ 
             x: width,
             y: height / 2 + 30,
             text: '0%',
-            style: {font: '38px Digitizer' }
+            style: {font: '38px Arial' }
         }).setColor('#0CC10C').setStroke('#FFB000', 4).setShadow(2, 2, '#ffff00', 1, false).setOrigin(0.5, 0.5);
         this.assetText = scene.make.text({
             x: width,
             y: height / 2 + 75,
             text: '',
-            style: { font: '12px Digitizer' }
+            style: { font: '12px Arial' }
         }).setColor('#ffff00').setStroke('#0CC10C', 2).setOrigin(0.5, 0.5);
 
     //// on progress / complete
