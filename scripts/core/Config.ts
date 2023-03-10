@@ -34,36 +34,42 @@ export namespace System {
         public max: types.dimension2D = { width: 0, height: 0 }
         public orientation: types.orientation = {
     
-            on: (event: string, callback: any, state: any): void => {
-                if (
-                    typeof screen.orientation !== null && 
-                    typeof screen.orientation !== 'undefined' && 
-                    Config.mobileAndTabletCheck()
-                ) 
-                    return screen.orientation.addEventListener(event, callback, state)
+            on: (
+                event: string, 
+                callback: EventListenerOrEventListenerObject, 
+                state: boolean | EventListenerOptions | undefined): void => {
+                    if (
+                        typeof screen.orientation !== null && 
+                        typeof screen.orientation !== 'undefined' && 
+                        Config.mobileAndTabletCheck()
+                    ) 
+                        screen.orientation.addEventListener(event, callback, state);
             },
-            off: (event: string, callback: any, state: any): void => {
-                if (
-                    screen.orientation && 
-                    Config.mobileAndTabletCheck()
-                ) 
-                    return screen.orientation.removeEventListener(event, callback, state)
+            off: (
+                event: string, 
+                callback: EventListenerOrEventListenerObject, 
+                state: boolean | EventListenerOptions | undefined): void => {
+                    if (
+                        screen.orientation && 
+                        Config.mobileAndTabletCheck()
+                    ) 
+                        screen.orientation.removeEventListener(event, callback, state);
             },
-            lock: (aspectRatio: OrientationLockType): any => {
+            lock: (aspectRatio: OrientationLockType): void => {
                 if (
                     typeof screen.orientation.lock !== null && 
                     typeof screen.orientation !== 'undefined' && 
                     Config.mobileAndTabletCheck()
                 ) 
-                    return screen.orientation.lock(aspectRatio);
+                    screen.orientation.lock(aspectRatio);
             },
-            unlock: (): any => {
+            unlock: (): void => {
                 if (
                     typeof screen.orientation.unlock !== null && 
                     typeof screen.orientation !== 'undefined' && 
                     Config.mobileAndTabletCheck()
                 ) 
-                    return screen.orientation.unlock();
+                    screen.orientation.unlock();
             }
         }
 
@@ -71,7 +77,7 @@ export namespace System {
         //---------------------------------------------------------
       
     
-        constructor(canvas: any)
+        constructor(canvas: Readonly<typeof Canvas>)
         {
             
             this.Canvas = canvas;
