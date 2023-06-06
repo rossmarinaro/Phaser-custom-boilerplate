@@ -3,17 +3,17 @@ import { System } from '../../core/Config';
 import { Actor } from './Actor';
 
 
-//--------- MEATBADDIE
+//--------- Enemy
 
 
-export class Meatbaddie extends Actor {
+export class Enemy extends Actor {
 
   public health: number
 
   constructor(scene: ENABLE3D.Scene3D, x: number, y: number, z: number, scale: number = 30)
   {
 
-    super(scene, 'meatbaddie', x, y, z, true, true, ()=> {
+    super(scene, 'enemy key', x, y, z, true, true, ()=> {
 
       this.scene = scene;
       this.health = 6;
@@ -37,7 +37,7 @@ export class Meatbaddie extends Actor {
   
       this.body.on.collision(async (otherObject, event) => {
 
-        if (otherObject instanceof Meatbaddie)
+        if (otherObject instanceof Enemy)
         {
           this.position.setX(otherObject.position.x - 5);
           this.position.setZ(otherObject.position.z - 5);

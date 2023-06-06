@@ -1,6 +1,6 @@
 import * as ENABLE3D from '@enable3d/phaser-extension';
 import { System } from '../../core/Config';
-import { Meatbaddie } from '../objects/meatbaddie'
+import { Enemy } from '../objects/enemy'
 
 export class Sandbox3D extends ENABLE3D.Scene3D {
   
@@ -9,11 +9,8 @@ export class Sandbox3D extends ENABLE3D.Scene3D {
     public enemies: ENABLE3D.ExtendedObject3D[] = []
 
     private assetCache: string[] = [ 
-      'meatbaddie', 
-      'rigatoni_rocket_launcher', 
-      'automac1000', 
-      'penne_pistol', 
-      'ikura_maki_tile' 
+      'key of some 3d asset', 
+
     ]
 
     constructor(){
@@ -44,7 +41,7 @@ export class Sandbox3D extends ENABLE3D.Scene3D {
 
       await System.Process.app.ThirdDimension.init(this, new ENABLE3D.THREE.Vector3(100, 100, -100), this.assetCache);   
 
-      await System.Process.app.ThirdDimension.create(this, stage, [150, 30, 50, true, { currentEquipped: 'rolling_pin1' }]);  
+      await System.Process.app.ThirdDimension.create(this, stage, [150, 30, 50, true, { currentEquipped: 'key of default weapon' }]);  
 
 
       //some test pickups
@@ -54,68 +51,13 @@ export class Sandbox3D extends ENABLE3D.Scene3D {
 
         case 'town': 
 
-            new System.Process.app.ThirdDimension.Inventory3D.pickup(this, 'rigatoni_rocket_launcher', 50, 15, 50);
-            new System.Process.app.ThirdDimension.Inventory3D.pickup(this, 'automac1000', -50, 15, -50);
-      
-            new System.Process.app.ThirdDimension.Inventory3D.pickup(this, 'penne_pistol', 100, 15, -100);
-            new System.Process.app.ThirdDimension.Inventory3D.pickup(this, 'ikura_maki_tile', 100, 15, 100);
-            
-        break;
+            new System.Process.app.ThirdDimension.Inventory3D.pickup(this, 'key of some weapon', 50, 15, 50);
 
-        case 'theoven3d': 
-
-            new System.Process.app.ThirdDimension.Inventory3D.pickup(this, 'rigatoni_rocket_launcher', 150, 40, 150);
-            new System.Process.app.ThirdDimension.Inventory3D.pickup(this, 'automac1000', -150, 40, -150);
-      
-            new System.Process.app.ThirdDimension.Inventory3D.pickup(this, 'ikura_maki_tile', -200, 40, -200);
-            new System.Process.app.ThirdDimension.Inventory3D.pickup(this, 'ikura_maki_tile', 200, 40, 180);
-      
-            new System.Process.app.ThirdDimension.Inventory3D.pickup(this, 'rigatoni_rocket_launcher', -150, -40, -150);
-            new System.Process.app.ThirdDimension.Inventory3D.pickup(this, 'automac1000', 299, 156, 506);
-      
-            new System.Process.app.ThirdDimension.Inventory3D.pickup(this, 'ikura_maki_tile', -200, -40, 180);
-            new System.Process.app.ThirdDimension.Inventory3D.pickup(this, 'ikura_maki_tile', 200, -40, 180);
-      
-            new System.Process.app.ThirdDimension.Inventory3D.pickup(this, 'penne_pistol', -100, -40, 180);
-            new System.Process.app.ThirdDimension.Inventory3D.pickup(this, 'penne_pistol', 100, -40, 180);
-            
-        break;
-
-        case 'freezer3d':
-
-            new System.Process.app.ThirdDimension.Inventory3D.pickup(this, 'rigatoni_rocket_launcher', 150, 45, 150);
-            new System.Process.app.ThirdDimension.Inventory3D.pickup(this, 'automac1000', -150, 45, -150);
-      
-            new System.Process.app.ThirdDimension.Inventory3D.pickup(this, 'ikura_maki_tile', -200, 240, -200);
-            new System.Process.app.ThirdDimension.Inventory3D.pickup(this, 'ikura_maki_tile', 200, 240, 200);
-      
-            new System.Process.app.ThirdDimension.Inventory3D.pickup(this, 'rigatoni_rocket_launcher', -150, -40, -150);
-            new System.Process.app.ThirdDimension.Inventory3D.pickup(this, 'automac1000', 50, -20, 470);
-      
-            new System.Process.app.ThirdDimension.Inventory3D.pickup(this, 'rigatoni_rocket_launcher', -200, 240, 80);
-            new System.Process.app.ThirdDimension.Inventory3D.pickup(this, 'automac1000', 200, 240, -80);
-      
-            new System.Process.app.ThirdDimension.Inventory3D.pickup(this, 'penne_pistol', -100, -40, 200);
-            new System.Process.app.ThirdDimension.Inventory3D.pickup(this, 'penne_pistol', 100, -40, 200);
-        
         break;
 
         case 'mountains-no-model':
 
-            new System.Process.app.ThirdDimension.Inventory3D.pickup(this, 'rigatoni_rocket_launcher', 150, 15, 150);
-            new System.Process.app.ThirdDimension.Inventory3D.pickup(this, 'automac1000', -150, 15, -150);
-      
-            new System.Process.app.ThirdDimension.Inventory3D.pickup(this, 'ikura_maki_tile', -200, 15, -200);
-            new System.Process.app.ThirdDimension.Inventory3D.pickup(this, 'ikura_maki_tile', 200, 15, 200);
-      
-            new System.Process.app.ThirdDimension.Inventory3D.pickup(this, 'rigatoni_rocket_launcher', -615, 15, -470);
-            new System.Process.app.ThirdDimension.Inventory3D.pickup(this, 'automac1000', 615, 15, 470);
-      
-            new System.Process.app.ThirdDimension.Inventory3D.pickup(this, 'ikura_maki_tile', -200, 15, 200);
-            new System.Process.app.ThirdDimension.Inventory3D.pickup(this, 'ikura_maki_tile', 200, 15, 200);
-      
-            new System.Process.app.ThirdDimension.Inventory3D.pickup(this, 'penne_pistol', -500, 15, 200);
-            new System.Process.app.ThirdDimension.Inventory3D.pickup(this, 'penne_pistol', 500, 15, 200);
+
 
         break;
       }
@@ -135,10 +77,7 @@ export class Sandbox3D extends ENABLE3D.Scene3D {
     //test baddies
 
       this.enemies.push(
-        new Meatbaddie(this, 70, stage !== 'mountains-no-model' ? 60 : 30, 300),
-        new Meatbaddie(this, -270, stage !== 'mountains-no-model' ? 60 : 30, -360),
-        new Meatbaddie(this, 270, stage !== 'mountains-no-model' ? -20 : 30, 80),
-        new Meatbaddie(this, 270, stage !== 'mountains-no-model' ? -20 : 30, -180)
+        new Enemy(this, 70, stage !== 'mountains-no-model' ? 60 : 30, 300)
       );
     }
 
@@ -154,23 +93,9 @@ export class Sandbox3D extends ENABLE3D.Scene3D {
 
         case 1: default:
 
-          this.assetCache.push('theoven3d');
-          return 'theoven3d';
-        
-        case 2:
-
-          this.assetCache.push('freezer3d', 'carrot', 'broccoli');
-          return 'freezer3d';
-        
-        case 3:
-
-          this.assetCache.push('carrot', 'broccoli');
-          return 'mountains-no-model';
-        
-        case 4:
-
-          this.assetCache.push('town');
+          this.assetCache.push('town3d asset');
           return 'town';
+        
       }
     }
 
