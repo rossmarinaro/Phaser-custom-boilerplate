@@ -7,7 +7,7 @@ const port = process.env.PORT || 9000,
   { InjectManifest } = require('workbox-webpack-plugin');
 
 module.exports = {
-  entry: ['./src/scripts/index.js', './webpack/credits.js'],
+  entry: ['./src/scripts/core/Application.ts', './webpack/credits.js'],
   output: {
     path: path.resolve(__dirname, '../dist'),
     filename: '[name].bundle.js',

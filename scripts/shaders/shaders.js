@@ -1,67 +1,284 @@
 /***SHADER PIPELINES */
 
+//variable to apply to pipeline shaders
+
+let fragShader;
 
 //-------------- shader obj
 
 export const Shaders = {
 
-    vertex: {
-        vertexShader: `
-            precision mediump float;
+        
 
-            uniform mat4 uProjectionMatrix;
-            uniform mat4 uViewMatrix;
+        //basic threejs vert shader
 
-            attribute vec2 inPosition;
+        three_std_Vert: ` 
+            varying vec2 vUv;
 
-            varying vec2 fragCoord;
-
-            void main ()
+            void main() 
             {
-                gl_Position = uProjectionMatrix * uViewMatrix * vec4(inPosition, 1.0, 1.0);
-
-                fragCoord = inPosition;
+                vUv = uv;
+                gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
             }
         `,
-        vertexShader2: `
-            precision mediump float;
 
-            uniform mat4 uProjectionMatrix;
-            uniform mat4 uViewMatrix;
+        //basic threejs frag shader
 
-            attribute vec2 inPosition;
+        three_std_Frag: `
+            varying vec2 vUv;
 
-            varying vec2 fragCoord;
-
-            void main ()
+            void main()
             {
-                gl_Position = uProjectionMatrix * uViewMatrix * vec4(inPosition, 1.0, 1.0);
-
-                fragCoord = inPosition;
-        }`,
-        vertexShader5: `
-            precision mediump float;
-
-            uniform mat4 uProjectionMatrix;
-            uniform mat4 uViewMatrix;
-
-            attribute vec2 inPosition;
-
-            varying vec2 fragCoord;
-
-            void main ()
-            {
-                // gl_Position = uProjectionMatrix * uViewMatrix * vec4(inPosition, 1.0, 1.0);
-
-                gl_Position = uProjectionMatrix * uViewMatrix * vec4(100.5, 0.1, 1.0, 1.0);
-
-                // gl_Position = vec4(inPosition, 1.0, 1.0);
-
-                fragCoord = inPosition;
+                gl_FragColor = vec4(vec3(vUv, 0.0), 1.0);
             }
         `,
-    },
-    frag: {
+
+        pnoise_Vert: `
+
+
+            vec3 mod289(vec3 x){ 
+                return x - floor(x * (1.0 / 289.0)) * 289.0;
+            } 
+            vec4 mod289(vec4 x){ 
+                return x - floor(x * (1.0 / 289.0)) * 289.0;
+            } 
+            vec4 permute(vec4 x){ 
+                return mod289(((x*34.0)+10.0)*x);
+            } 
+            vec4 taylorInvSqrt(vec4 r){ 
+                return 1.79284291400159 - 0.85373472095314 * r;
+            } 
+            vec3 fade(vec3 t) { 
+                return t*t*t*(t*(t*6.0-15.0)+10.0);
+            } 
+            
+            float cnoise(vec3 P)
+            { 
+                vec3 Pi0 = floor(P); 
+                vec3 Pi1 = Pi0 + vec3(1.0); 
+                Pi0 = mod289(Pi0); 
+                Pi1 = mod289(Pi1); 
+                vec3 Pf0 = fract(P); 
+                vec3 Pf1 = Pf0 - vec3(1.0); 
+                vec4 ix = vec4(Pi0.x, Pi1.x, Pi0.x, Pi1.x); 
+                vec4 iy = vec4(Pi0.yy, Pi1.yy); 
+                vec4 iz0 = Pi0.zzzz; 
+                vec4 iz1 = Pi1.zzzz; 
+                vec4 ixy = permute(permute(ix) + iy); 
+                vec4 ixy0 = permute(ixy + iz0); 
+                vec4 ixy1 = permute(ixy + iz1); 
+                vec4 gx0 = ixy0 * (1.0 / 7.0); 
+                vec4 gy0 = fract(floor(gx0) * (1.0 / 7.0)) - 0.5; 
+                gx0 = fract(gx0); 
+                vec4 gz0 = vec4(0.5) - abs(gx0) - abs(gy0); 
+                vec4 sz0 = step(gz0, vec4(0.0)); 
+                gx0 -= sz0 * (step(0.0, gx0) - 0.5); 
+                gy0 -= sz0 * (step(0.0, gy0) - 0.5); 
+                vec4 gx1 = ixy1 * (1.0 / 7.0); 
+                vec4 gy1 = fract(floor(gx1) * (1.0 / 7.0)) - 0.5; 
+                gx1 = fract(gx1); 
+                vec4 gz1 = vec4(0.5) - abs(gx1) - abs(gy1); 
+                vec4 sz1 = step(gz1, vec4(0.0)); 
+                gx1 -= sz1 * (step(0.0, gx1) - 0.5); 
+                gy1 -= sz1 * (step(0.0, gy1) - 0.5); 
+                vec3 g000 = vec3(gx0.x,gy0.x,gz0.x); 
+                vec3 g100 = vec3(gx0.y,gy0.y,gz0.y); 
+                vec3 g010 = vec3(gx0.z,gy0.z,gz0.z); 
+                vec3 g110 = vec3(gx0.w,gy0.w,gz0.w); 
+                vec3 g001 = vec3(gx1.x,gy1.x,gz1.x); 
+                vec3 g101 = vec3(gx1.y,gy1.y,gz1.y); 
+                vec3 g011 = vec3(gx1.z,gy1.z,gz1.z); 
+                vec3 g111 = vec3(gx1.w,gy1.w,gz1.w); 
+                vec4 norm0 = taylorInvSqrt(vec4(dot(g000, g000), dot(g010, g010), dot(g100, g100), dot(g110, g110))); 
+                
+                g000 *= norm0.x; g010 *= norm0.y;
+                g100 *= norm0.z; 
+                g110 *= norm0.w; 
+                vec4 norm1 = taylorInvSqrt(vec4(dot(g001, g001), dot(g011, g011), dot(g101, g101), dot(g111, g111))); 
+                g001 *= norm1.x; 
+                g011 *= norm1.y; 
+                g101 *= norm1.z; 
+                g111 *= norm1.w; 
+            
+                float n000 = dot(g000, Pf0); 
+                float n100 = dot(g100, vec3(Pf1.x, Pf0.yz)); 
+                float n010 = dot(g010, vec3(Pf0.x, Pf1.y, Pf0.z)); 
+                float n110 = dot(g110, vec3(Pf1.xy, Pf0.z)); 
+                float n001 = dot(g001, vec3(Pf0.xy, Pf1.z)); 
+                float n101 = dot(g101, vec3(Pf1.x, Pf0.y, Pf1.z)); 
+                float n011 = dot(g011, vec3(Pf0.x, Pf1.yz)); 
+                float n111 = dot(g111, Pf1); 
+                vec3 fade_xyz = fade(Pf0); 
+                vec4 n_z = mix(vec4(n000, n100, n010, n110), vec4(n001, n101, n011, n111), fade_xyz.z); 
+                vec2 n_yz = mix(n_z.xy, n_z.zw, fade_xyz.y); 
+                float n_xyz = mix(n_yz.x, n_yz.y, fade_xyz.x); 
+            
+                return 2.2 * n_xyz;
+            } 
+            
+            float pnoise(vec3 P, vec3 rep)
+            { 
+                vec3 Pi0 = mod(floor(P), rep); 
+                vec3 Pi1 = mod(Pi0 + vec3(1.0), rep); 
+                Pi0 = mod289(Pi0); 
+                Pi1 = mod289(Pi1); 
+                vec3 Pf0 = fract(P); 
+                vec3 Pf1 = Pf0 - vec3(1.0);
+                vec4 ix = vec4(Pi0.x, Pi1.x, Pi0.x, Pi1.x); 
+                vec4 iy = vec4(Pi0.yy, Pi1.yy); 
+                vec4 iz0 = Pi0.zzzz; 
+                vec4 iz1 = Pi1.zzzz; 
+                vec4 ixy = permute(permute(ix) + iy); 
+                vec4 ixy0 = permute(ixy + iz0); 
+                vec4 ixy1 = permute(ixy + iz1); 
+                vec4 gx0 = ixy0 * (1.0 / 7.0); 
+                vec4 gy0 = fract(floor(gx0) * (1.0 / 7.0)) - 0.5; 
+                gx0 = fract(gx0); 
+                vec4 gz0 = vec4(0.5) - abs(gx0) - abs(gy0); 
+                vec4 sz0 = step(gz0, vec4(0.0)); 
+                gx0 -= sz0 * (step(0.0, gx0) - 0.5); 
+                gy0 -= sz0 * (step(0.0, gy0) - 0.5); 
+                vec4 gx1 = ixy1 * (1.0 / 7.0); 
+                vec4 gy1 = fract(floor(gx1) * (1.0 / 7.0)) - 0.5; 
+                gx1 = fract(gx1); 
+                vec4 gz1 = vec4(0.5) - abs(gx1) - abs(gy1); 
+                vec4 sz1 = step(gz1, vec4(0.0)); 
+                gx1 -= sz1 * (step(0.0, gx1) - 0.5); 
+                gy1 -= sz1 * (step(0.0, gy1) - 0.5); 
+                vec3 g000 = vec3(gx0.x,gy0.x,gz0.x); 
+                vec3 g100 = vec3(gx0.y,gy0.y,gz0.y); 
+                vec3 g010 = vec3(gx0.z,gy0.z,gz0.z); 
+                vec3 g110 = vec3(gx0.w,gy0.w,gz0.w); 
+                vec3 g001 = vec3(gx1.x,gy1.x,gz1.x); 
+                vec3 g101 = vec3(gx1.y,gy1.y,gz1.y); 
+                vec3 g011 = vec3(gx1.z,gy1.z,gz1.z); 
+                vec3 g111 = vec3(gx1.w,gy1.w,gz1.w); 
+                vec4 norm0 = taylorInvSqrt(vec4(dot(g000, g000), dot(g010, g010), dot(g100, g100), dot(g110, g110))); 
+                g000 *= norm0.x; 
+                g010 *= norm0.y; 
+                g100 *= norm0.z; 
+                g110 *= norm0.w; 
+                vec4 norm1 = taylorInvSqrt(vec4(dot(g001, g001), dot(g011, g011), dot(g101, g101), dot(g111, g111))); 
+                g001 *= norm1.x; 
+                g011 *= norm1.y; 
+                g101 *= norm1.z; 
+                g111 *= norm1.w; 
+                float n000 = dot(g000, Pf0); 
+                float n100 = dot(g100, vec3(Pf1.x, Pf0.yz)); 
+                float n010 = dot(g010, vec3(Pf0.x, Pf1.y, Pf0.z)); 
+                float n110 = dot(g110, vec3(Pf1.xy, Pf0.z)); 
+                float n001 = dot(g001, vec3(Pf0.xy, Pf1.z)); 
+                float n101 = dot(g101, vec3(Pf1.x, Pf0.y, Pf1.z)); 
+                float n011 = dot(g011, vec3(Pf0.x, Pf1.yz)); 
+                float n111 = dot(g111, Pf1); 
+                vec3 fade_xyz = fade(Pf0); 
+                vec4 n_z = mix(vec4(n000, n100, n010, n110), vec4(n001, n101, n011, n111), fade_xyz.z); 
+                vec2 n_yz = mix(n_z.xy, n_z.zw, fade_xyz.y); 
+                float n_xyz = mix(n_yz.x, n_yz.y, fade_xyz.x); 
+                return 2.2 * n_xyz;
+            }
+        
+    
+            varying vec2 vUv;
+            varying float noise;
+            uniform float time;
+
+            float turbulence (vec3 p)
+            {
+                float w = 100.0;
+                float t = -.5;
+                
+                for (float f = 1.0; f <= 10.0; f++)
+                {
+                    float power = pow(2.0, f);
+                    t += abs (pnoise(vec3(power * p), vec3 (10.0, 10.0, 10.0)) / power);
+
+                }
+                return t;
+                
+            }
+
+            void main()
+            {
+                vUv = uv;
+                noise = 10.0 * -.10 * turbulence(.5 * normal + time);
+                float b = 5.0 * pnoise(0.05 * position + vec3(2.0 * time), vec3(100.0));
+                float displacement = - noise + b;
+
+                vec3 newPosition = position + normal * displacement;
+                gl_Position = projectionMatrix * modelViewMatrix * vec4(newPosition, 1.0);
+            }
+        `,
+
+        muzzleFlash_Frag: `
+
+            varying vec2 vUv;
+            uniform sampler2D tExplosion;
+            uniform float alpha;
+
+            float random(vec3 scale, float seed)
+            {
+                return fract(sin(dot(gl_FragCoord.xyz + seed, scale)) * 43758.5453 + seed);
+            }
+
+            void main()
+            {
+                float r = .01 * random(vec3(12.9898, 78.233, 151.7182), 0.0);
+                vec4 color = texture2D(tExplosion, vUv + r) * alpha;
+                gl_FragColor = vec4(color.rgba);
+            }
+        `,
+
+         three_bloom_Frag: `
+
+            uniform sampler2D baseTexture;
+            uniform sampler2D bloomTexture;
+
+            varying vec2 vUv;
+
+            void main()
+            {
+                gl_FragColor = ( texture2D(baseTexture, vUv) + vec4(1.0) * texture2D(bloomTexture, vUv));
+            }
+        `,
+
+        vert3DVary: `
+
+            uniform float pointMultiplier;
+
+            uniform float angle;
+            uniform vec4 colour;
+
+            varying vec4 vColour;
+            varying vec2 vAngle;
+
+            void main() 
+            {
+                vec4 mvPosition = modelViewMatrix * vec4(position, 1.0);
+
+                vAngle = vec2(cos(angle), sin(angle));
+                vColour = colour;
+
+                gl_Position = projectionMatrix * mvPosition;
+                gl_PointSize = 1.0 * pointMultiplier / gl_Position.w;
+            
+            }`,
+
+        particle3D: `
+
+            uniform sampler2D diffuseTexture;
+            uniform float alpha;
+
+            varying vec4 vColour;
+            varying vec2 vAngle;
+
+            void main()
+            {
+                vec2 coords = (gl_PointCoord - 0.5) * mat2(vAngle.x, vAngle.y, -vAngle.y, vAngle.x) + 0.5;
+                gl_FragColor = vec4(1.0, 1.0, 1.0, alpha) * vColour;
+
+            }`,
+
         wave: `
             #ifdef GL_ES
             precision mediump float;
@@ -282,9 +499,7 @@ export const Shaders = {
                 return clamp( 1.0 - 3.0*occ, 0.0, 1.0 );    
             }
             
-            
-            
-            
+               
             vec3 render( in vec3 ro, in vec3 rd )
             { 
                 vec3 col = vec3(0.0, 0.0, 0.0);
@@ -393,7 +608,7 @@ export const Shaders = {
             uniform vec2 resolution;
             uniform vec2 mouse;
 
-            varying vec2 fragCoord;
+            uniform vec2 fragCoord;
 
             void main (void)
             {
@@ -410,16 +625,63 @@ export const Shaders = {
                 gl_FragColor = vec4(clamp(intensity * vec3(0.0777, 0.196, 0.27), vec3(0.), vec3(1.)), 0.);
             }
         `,
+        reverseFire:
+        `
+
+            #ifdef GL_ES
+            precision mediump float;
+            #endif
+
+            uniform float time;
+            uniform vec2 resolution;
+
+            float snoise(vec3 uv, float res)
+            {
+                const vec3 s = vec3(1e0, 1e2, 1e3);
+                
+                uv *= res;
+                
+                vec3 uv0 = floor(mod(uv, res))*s;
+                vec3 uv1 = floor(mod(uv+vec3(1.), res))*s;
+                
+                vec3 f = fract(uv); f = f*f*(3.0-2.0*f);
+
+                vec4 v = vec4(uv0.x+uv0.y+uv0.z, uv1.x+uv0.y+uv0.z,
+                            uv0.x+uv1.y+uv0.z, uv1.x+uv1.y+uv0.z);
+
+                vec4 r = fract(sin(v*1e-1)*1e3);
+                float r0 = mix(mix(r.x, r.y, f.x), mix(r.z, r.w, f.x), f.y);
+                
+                r = fract(sin((v + uv1.z - uv0.z)*1e-1)*1e3);
+                float r1 = mix(mix(r.x, r.y, f.x), mix(r.z, r.w, f.x), f.y);
+                
+                return mix(r0, r1, f.z)*2.-1.;
+            }
+
+            void main( void ) {
+
+                vec2 p = -.5 + gl_FragCoord.xy / resolution.xy;
+                p.x *= resolution.x/resolution.y;
+                
+                float color = (6.5*length(2.*p))-4.0;
+                
+                vec3 coord = vec3(atan(p.x,p.y), length(p)*.4, .5);
+                
+                for(int i = 1; i <= 10; i++)
+                {
+                    float power = pow(2.0, float(i));
+                    color += (2.5 / power) * snoise(coord + vec3(0.,-time*.08, time*.01), power*16.);
+                }
+                gl_FragColor = vec4( color, pow(max(color,0.),1.)*0.4, pow(max(color,0.),2.)*0.15 , color);
+            }   
+        `,
         fireShader: 
             `
             #ifdef GL_ES
             precision mediump float;
             #endif
 
-            // Yuldashev Mahmud Effect took from shaderToy mahmud9935@gmail.com
-
             uniform float time;
-            uniform vec2 mouse;
             uniform vec2 resolution;
 
             float snoise(vec3 uv, float res)
@@ -614,8 +876,6 @@ export const Shaders = {
             gl_FragColor = vec4( col, 0.5 );
         }
 
-
-
         `,
         fragmentShader5: `
             precision mediump float;
@@ -680,7 +940,6 @@ export const Shaders = {
             #ifdef GL_ES
             precision mediump float;
             #endif
-
 
 
             uniform float time;
@@ -749,83 +1008,8 @@ export const Shaders = {
                 //fc *= smoothstep(f-0.1, f, length(p)) - smoothstep(f, f+0.1, length(p));
                 gl_FragColor = vec4(length(fc)*vec3(1,02,0)*0.04, 1.0);
             }
-        `,
-        fragPortal: `
-            #ifdef GL_ES
-            precision mediump float;
-            #endif
-
-            uniform float time;
-            uniform vec2 mouse; 
-            uniform vec2 resolution;
-
-            float snoise(vec3 uv, float res) {
-                const vec3 s = vec3(1e0, 1e2, 1e3);
-
-                uv *= res;
-
-                vec3 uv0 = floor(mod(uv, res)) * s;
-                vec3 uv1 = floor(mod(uv + vec3(1.0), res)) * s;
-
-                vec3 f = smoothstep(0.0, 1.0, fract(uv));
-
-                vec4 v = vec4(uv0.x + uv0.y + uv0.z,
-                        uv1.x + uv0.y + uv0.z,
-                        uv0.x + uv1.y + uv0.z,
-                        uv1.x + uv1.y + uv0.z);
-
-                vec4 r = fract(sin(v * 1e-1) * 1e3);
-                float r0 = mix(mix(r.x, r.y, f.x), mix(r.z, r.w, f.x), f.y);
-
-                r = fract(sin((v + uv1.z - uv0.z) * 1e-1) * 1e3);
-                float r1 = mix(mix(r.x, r.y, f.x), mix(r.z, r.w, f.x), f.y);
-
-                return mix(r0, r1, f.z) * 2.0 - 1.0;
-            }
-
-            void main() {
-                vec2 p = -0.5 + gl_FragCoord.xy / resolution.xy;
-                p.x *= resolution.x / resolution.y;
-                float lp = .02/length(p);
-                float ap = atan(p.x, p.y);
-
-                float time = time*.04-pow(time, .8)*(1. + .1*cos(time*0.04))*2.;
-
-                float r1 = 0.2;
-                if(lp <= r1){
-                    ap -= time*0.1+lp*9.;
-                    lp = sqrt(1.-lp/r1)*0.5;
-                }else{
-                    ap += time*0.1+lp*2.;
-                    lp -= r1;
-                }
-
-                lp = pow(lp*lp, 1./3.);
-
-                p = lp*vec2(sin(ap), cos(ap));
-
-                float color = 3.0 - (6.0 * lp);
-
-                vec3 coord = vec3(atan(p.x, p.y) / 6.2832 + 0.5, 0.4 * lp, 0.5);
-
-                float power = 2.0;
-                for (int i = 0; i < 6; i++) {
-                    power *= 2.0;
-                    color += (1.5 / power) * snoise(coord + vec3(0.0, -0.05 * time*2.0, 0.01 * time*2.0), 16.0 * power);
-                }
-                color = max(color, 0.0);
-                float c2 = color * color;
-                float c3 = color * c2;
-                vec3 fc = vec3(color * 0.34, c2*0.15, c3*0.85);
-                float f = fract(time);
-                //fc *= smoothstep(f-0.1, f, length(p)) - smoothstep(f, f+0.1, length(p));
-                gl_FragColor = vec4(length(fc)*vec3(1,02,0)*0.04, 1.0);
-            }
         `
-    }
 }
-//----variable to apply to pipeline shaders
-    let fragShader;
 
 
 // -------------------------- change colors / renders on scene

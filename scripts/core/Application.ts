@@ -32,11 +32,14 @@ import { HUD } from '../interfaces/HUD';
 import { TextUI } from './Text';
 import { Background } from '../scenes/Background';
 
-
+import { parseResources } from './parser';
+import { ThirdDimension } from '../3d/core/ThirdDimension';
 
 //------------------------------------ APP
 
 export default class Application {
+
+    public resourceParser: typeof parseResources = parseResources
  
     public game: typeof Game = Game
     public dataManager: typeof GameData = GameData
@@ -48,6 +51,7 @@ export default class Application {
     public spawner: typeof SpawnManager = SpawnManager
     public inventory: typeof InventoryManager = InventoryManager
     public maps: typeof MapManager = MapManager
+    public ThirdDimension: typeof ThirdDimension = ThirdDimension
 
     public cam: typeof Camera = Camera
     public text: typeof Text = Text
@@ -199,3 +203,8 @@ export default class Application {
 
         
 
+
+//------------ APPLICATION ENTRY POINT ---------------------//
+
+
+window.onload = async () => System.Process.app = new Application(System.Process); 

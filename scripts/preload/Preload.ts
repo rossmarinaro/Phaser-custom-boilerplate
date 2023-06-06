@@ -1,13 +1,10 @@
-//////Pastaboss game preload assets
+// Preload Assets
 
 import { System } from '../core/Config';
-import { Scene3D } from '@enable3d/phaser-extension';
-import { parseResources } from '../core/parser';
 
 import mainAnims from '../animations/main';
 import playerAnims from '../animations/player';
 import enemyAnims from '../animations/enemies';
-
 
 
 export class Preload extends Phaser.Scene {
@@ -29,7 +26,7 @@ export class Preload extends Phaser.Scene {
 	constructor() 
     {
 
-	    super("Preload");
+	    super('Preload');
  
         this.stageText = null;  
         this.assetText = null;
@@ -44,7 +41,7 @@ export class Preload extends Phaser.Scene {
 	}
 
 
-//----------------------------------------------------------------------------------------------------------------
+//--------------------------
 
 	private init(data: Phaser.Scenes.Systems | any): void
     {
@@ -53,11 +50,11 @@ export class Preload extends Phaser.Scene {
         this.scene.launch('Background', {type: 'blank'});
 
         System.Process.orientation.lock('portrait-primary');
-        System.Process.app.ui.listen(this, 'Preload');
+        System.Process.app.ui.listen(this, 'Preload'); 
 
 	}
 
-//----------------------------------------------------------------------------------------------------------------
+//-------------------------------
 
 	private preload(): void
     {   
@@ -73,7 +70,7 @@ export class Preload extends Phaser.Scene {
 		this.progressBar(this);
 	}
 
-//---------------------------------------------------------------------------------------------------------------
+//-------------------------------
 
     private create(): void 
     {
@@ -92,25 +89,20 @@ export class Preload extends Phaser.Scene {
         this.scene.stop('Preload');
     }
 
-//----------------------------------------------------------------------------------
 
-    public async preload3D (scene: Phaser.Scene, scene3d: Scene3D): Promise<void> 
-    {
-        scene.scene.launch('Background', {type: 'blank'});
-        await parseResources(scene3d, scene.cache.json.get('resources_3d'));
-        setTimeout(()=> scene.scene.stop('Background'), 1000);
-    }
+//--------------------- parse json asset manifests
 
-//----------------------------------------------------------------------------------
 
     private async parse(scene: Phaser.Scene): Promise<void>
     {
 
-        parseResources(scene, scene.cache.json.get('resources_main')); 
-
+        await System.Process.app.resourceParser(scene, scene.cache.json.get('resources_main')); 
+        await System.Process.app.resourceParser(scene, scene.cache.json.get('resources_3d'));
     }
 
-//---------------------------------------------------------------------------------- progress bar
+
+//---------------------- progress bar
+
 
     public progressBar(scene: Phaser.Scene): void
     { 
@@ -127,28 +119,28 @@ export class Preload extends Phaser.Scene {
             x: width,
             y: height / 2 - 100,
             text: 'Loading',
-            style: {font: '50px Arial'}
+            style: {font: '50px Digitizer'}
         }).setColor('#ff0000').setStroke('#FFB000', 4).setShadow(2, 2, '#ffff00', 1, false).setOrigin(0.5, 0.5);   
         this.stageText = scene.make.text({
             x: width,
             y: height / 2 - 30,
             text: this.data['currentStage'],
-            style: { font: '20px Arial' }
+            style: { font: '20px Digitizer' }
         }).setColor('#ffffff').setStroke('#FF0000', 4).setOrigin(0.5, 0.5);
         this.percentText = scene.make.text({ 
             x: width,
             y: height / 2 + 30,
             text: '0%',
-            style: {font: '38px Arial' }
+            style: {font: '38px Digitizer' }
         }).setColor('#0CC10C').setStroke('#FFB000', 4).setShadow(2, 2, '#ffff00', 1, false).setOrigin(0.5, 0.5);
         this.assetText = scene.make.text({
             x: width,
             y: height / 2 + 75,
             text: '',
-            style: { font: '12px Arial' }
+            style: { font: '12px Digitizer' }
         }).setColor('#ffff00').setStroke('#0CC10C', 2).setOrigin(0.5, 0.5);
 
-    //// on progress / complete
+    // on progress / complete
 
         let dots = '';
         const updateLoad = ()=>{
@@ -185,14 +177,16 @@ export class Preload extends Phaser.Scene {
         // destroy progress bar
 
             if (this.percentText !== null && this.percentText.text === '100%')
-                System.Process.app.game.gameState === true ? 
+                System.Process.app.game.gameState ? 
                     this.destroyProgressBar() : scene.time.delayedCall(3000, ()=> this.destroyProgressBar());  
         })
         .on('fileprogress', (file: any) => this.assetText?.setText(file.key)); 
 
     }
 
-//---------------------------------------------------------------------------------------- destroy progress bar
+
+//------------------------------------------- destroy progress bar
+
 
     private destroyProgressBar(): void
     {
@@ -207,7 +201,8 @@ export class Preload extends Phaser.Scene {
         this.assetText?.destroy();
     }
 
-    
+
+
 
 }
 

@@ -2,7 +2,8 @@
 import * as types from '../../../typings/types';
 
 import { Canvas }  from '@enable3d/phaser-extension';
-
+import Application from './Application';
+import Utils from './Utils';
 
 //--------------------------------------- base sys namespace
 
@@ -17,8 +18,9 @@ export namespace System {
         //electron: false, false
         //cordova: false, true
 
+        public app: Application
+        public static utils: typeof Utils = Utils
         public game: Readonly<Phaser.Game>
-        public app: any
         public utils: any
         public parent: string
         public key: string
@@ -77,11 +79,10 @@ export namespace System {
         //---------------------------------------------------------
       
     
-        constructor(canvas: Readonly<typeof Canvas>)
+        constructor()
         {
             
-            this.Canvas = canvas;
-            this.app = null; 
+            this.Canvas = {...Canvas({ antialias: true })};
             this.parent = 'game';
             this.key = '';
             this.utils = null;
@@ -231,7 +232,7 @@ export namespace System {
     
     
     
-    export const Process = new Config({...Canvas({ antialias: true })});
+    export const Process = new Config;
     
     
 }
