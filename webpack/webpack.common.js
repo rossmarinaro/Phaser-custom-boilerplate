@@ -80,7 +80,7 @@ module.exports = {
       WEBGL_RENDERER: JSON.stringify(true)
     }),
 
-    new HtmlWebpackPlugin({ gameName: 'Pastaboss: A Recipe For Disaster', template: 'src/index.html', inject: 'body' }),
+    new HtmlWebpackPlugin({ gameName: 'Custom Phaser / ENABLE3D TEMPLATE - PASTABOSS ENTERPRISE', template: 'src/index.html', inject: 'body' }),
     
     new CopyWebpackPlugin([
       { from: 'src/assets', to: 'assets' },
