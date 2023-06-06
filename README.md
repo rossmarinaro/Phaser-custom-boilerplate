@@ -1,6 +1,6 @@
-# Custom Phaser Game Boilerplate setup configuration
+# Custom Phaser / Enable3D Game Boilerplate setup configuration
 
-** Built with Typescript, Webpack and Phaserjs **
+** Built with Typescript, Webpack, Phaserjs / Enable3D(Threejs, Ammojs) **
 
 Download zip and run npm install.
 
