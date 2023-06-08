@@ -273,8 +273,6 @@ export class Player3D extends Actor {
       this.canJump = false;
 
       this.setState('jump');
-      
-      System.Process.app.audio.play('huh', 1, false, this.scene, 0); 
 
       if (this.isSelf === true)
         this.rigidBody.body.applyImpulse({x: 0, y: 150, z: 0}, {x: 0, y: -200, z: 0})
@@ -388,7 +386,6 @@ export class Player3D extends Actor {
     {
       case 'ikura_maki_tile':
         this.health += 4;
-        System.Process.app.audio.play('gulp', 1, false, this.scene, 0);
       break;
     }
   }

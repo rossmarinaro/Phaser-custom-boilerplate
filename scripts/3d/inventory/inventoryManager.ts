@@ -66,8 +66,6 @@ export class Inventory3D {
         if (obj.hasBody && Inventory3D.selections.includes(obj['key']))
         {
 
-            System.Process.app.audio.play('macaroni_ring', 1, false, scene, 0);
-
             const str = await System.Config.utils.strings.removeJunk(obj['key']),
                   article = await System.Config.utils.strings.checkVowel(str),
                   player = scene['player'];
@@ -85,8 +83,6 @@ export class Inventory3D {
                     Inventory3D.increment(scene, obj);
                 else  
                 {
-    
-                    System.Process.app.audio.play('sick', 1, false, scene, 0);
                 
                     scene.data['weapons'].push(obj['key']);
     
